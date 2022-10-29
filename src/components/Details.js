@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import Modal from 'react-bootstrap/Modal'
+// import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,Link } from 'react-router-dom'
+// import Addemp from './emp/Addemp'
 
 const Details = () => {
 
@@ -10,13 +11,13 @@ const Details = () => {
 
     const history = useNavigate();
 
-    const [show, setShow] = useState(false);
+    // const [ setShow] = useState(false);
 
-    var todayDate = new Date().toISOString().slice(0, 10);
+    // var todayDate = new Date().toISOString().slice(0, 10);
   
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    // const handleClose = () => setShow(false);
+    // const handleShow = () => setShow(true);
 
     const Birthday = () => {
         const getuser = localStorage.getItem("user_login");
@@ -26,16 +27,16 @@ const Details = () => {
             setLoginData(user);
 
 
-            const userbirth = logindata.map((el, k) => {
-                return el.date === todayDate
-            });
+            // const userbirth = logindata.map((el, k) => {
+            //     return el.date === todayDate
+            // });
 
-            if (userbirth) {
-                setTimeout(() => {
-                    console.log("ok");
-                    handleShow();
-                }, 3000)
-            }
+            // if (userbirth) {
+            //     setTimeout(() => {
+            //         console.log("ok");
+            //         handleShow();
+            //     }, 3000)
+            // }
         }
     }
 
@@ -46,18 +47,25 @@ const Details = () => {
 
     useEffect(() => {
         Birthday();
-    }, [])
+    },// eslint-disable-next-line
+     [])
 
     return (
         <>
             {
                 logindata.length === 0 ? "errror" :
                     <>
-                        <h1>detials page</h1>
-                        <h1>{logindata[0].name}</h1>
-                        <Button onClick={userlogout}>LogOut</Button>
+                        <h3 style={{marginTop:"20px"}}>Welcome {logindata[0].name}</h3>
+                        {/* <h1>{logindata[0].name}</h1> */}
+                        <Button onClick={userlogout} style={{marginTop:"20px"}}>LogOut</Button>
 
-                {
+                        <div style={{ marginTop:"20px", }}>
+                       <Link to ="/addemp" style={{ textDecoration:"none" , fontSize:"20px",color:"black"}}>Add Employee</Link>
+                       <Link to ="/viewemp" style={{marginLeft:"20px", marginTop:"20px",textDecoration:"none",fontSize:"20px", color:"black"}}>View Employee</Link>
+
+                        </div>
+
+                {/* {
                     logindata[0].date === todayDate ? 
                     <Modal show={show} onHide={handleClose}>
                             <Modal.Header closeButton>
@@ -73,7 +81,7 @@ const Details = () => {
                                 </Button>
                             </Modal.Footer>
                         </Modal>:""
-                }   
+                }    */}
                      
                     </>
             }
